@@ -144,7 +144,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 170100049}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d422dca13c30a074d8509dec614f6836, type: 3}
   m_Name: 
@@ -172,19 +172,19 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 170100049}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32f7792231b8f3e43baa693fce170663, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Grid
   cubePrefab: {fileID: 4065368774593356226, guid: becd02d5ef798a047bbe634ff601954e, type: 3}
-  gridWidth: 50
-  gridHeight: 10
-  gridLength: 50
-  heightScale: 20
+  gridWidth: 20
+  gridHeight: 30
+  gridLength: 20
+  heightScale: 10
   heightOffset: 0
-  noiseScaleX: 5
-  noiseScaleZ: 5
+  noiseScaleX: 2
+  noiseScaleZ: 2
   snowMaterial: {fileID: 2100000, guid: 004dc417d47874b4a82ac5282be54c84, type: 2}
   snowHeight: 7
   snowHeightRange: 1
