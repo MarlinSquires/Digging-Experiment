@@ -2,17 +2,14 @@ using UnityEngine;
 
 public class ChunkLoader : MonoBehaviour
 {
-   
-    [SerializeField] private Material material;
     
-    [SerializeField] private BlockType blockType;
+    private 
+
+    static World GetWorld()
+    {
+        return null;
+    }
+    
 }
 
 
-[System.Serializable]
-public class BlockType
-{
-    public string name;
-    public bool opaque;
-
-}

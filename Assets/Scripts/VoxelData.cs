@@ -5,18 +5,26 @@ using UnityEngine;
 public static class VoxelData
 {
 
+    public static readonly int AtlasSizeInBlocks = 4; // The number of blocks in the atlas
+
+    public static float normalizedBlockSize => 1f / AtlasSizeInBlocks; // The portion of the UV map an individual block takes up, expressed as a float between 0 and 1
+
+
+    // The 8 vertices of each cubic voxel
     public static readonly Vector3[] VoxelVerts = new Vector3[8]
     {
         new Vector3(0, 0, 0), // 0
         new Vector3(1, 0, 0), // 1
         new Vector3(1, 1, 0), // 2
         new Vector3(0, 1, 0), // 3
+        
         new Vector3(0, 0, 1), // 4
         new Vector3(1, 0, 1), // 5
         new Vector3(1, 1, 1), // 6
         new Vector3(0, 1, 1), // 7
     };
     
+    // The 12 tris of each voxel. each entry of 4 ints corresponds to 2 tris (1 face), since each face will have its tris share 2 vertices
     public static readonly int[,] VoxelTris = new int[6, 4]
     {
         { 0, 3, 1, 2 }, // Back face
@@ -26,13 +34,14 @@ public static class VoxelData
         { 4, 7, 0, 3 }, // Left face
         { 1, 2, 5, 6 }, // Right face
     };
-
+    
+    // The order in which the verts of a face are iterated over to create 2 tris
     public static readonly int[] VertOrder = new int[6]
     {
         0, 1, 2, 2, 1, 3
     };
     
-    // Faces are made up of 2 tris
+    // The normals for each of the 6 faces of the voxel
     public static readonly Vector3[] FaceNormals = new Vector3[6]
     {
         Vector3.back,
@@ -43,6 +52,7 @@ public static class VoxelData
         Vector3.right,
     };
     
+    // The UV coords of the 4 verts of each face
     public static readonly Vector2[] FaceUVs = new Vector2[4]
     {
         new Vector2(0, 0),
