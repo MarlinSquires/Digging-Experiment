@@ -145,7 +145,7 @@ Transform:
   m_GameObject: {fileID: 469327300}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 32.43911, y: 246.28377, z: 35.58085}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -163,13 +163,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58b7f48c47702e347a9b7ce3879f9e38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::World
-  grassHeight: 51
+  player: {fileID: 0}
+  grassHeight: 60
   grassHeightRange: 0
   dirtHeight: 50
   dirtHeightRange: 0
-  stoneHeight: 20
+  stoneHeight: 5
   stoneHeightRange: 0
-  bedrockHeight: -5
+  bedrockHeight: 0
   bedrockHeightRange: 0
   material: {fileID: 2100000, guid: 5b6b1b0037d88204886f62494ec53c9c, type: 2}
   blockTypes:
@@ -338,7 +339,7 @@ Transform:
   m_GameObject: {fileID: 1750217192}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 0, y: 65, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

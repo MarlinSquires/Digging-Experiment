@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class World : MonoBehaviour
 {
+    public Transform player;
+    
     
     [Header("Block Spawn Heights")]
     [SerializeField] private int grassHeight;
@@ -30,6 +32,8 @@ public class World : MonoBehaviour
     [Space(15)]
     
     
+    
+    
     [SerializeField] private Material material;
     public Material GetMaterial() => material;
 
@@ -40,6 +44,8 @@ public class World : MonoBehaviour
 
     void Start()
     {
+        player = Camera.main.transform;
+        
         GenerateWorld();
         
     }
@@ -47,19 +53,67 @@ public class World : MonoBehaviour
     void GenerateWorld()
     {
         _chunks = new Chunk[2048];
-
-        int count = 4;
+        
         
         int index = 0;
-        for (int x = 0; x < count; x++)
+        for (int x = 0; x < WorldData.WorldSizeInChunks; x++)
         {
-            for (int z = 0; z < count; z++)
+            for (int z = 0; z < WorldData.WorldSizeInChunks; z++)
             {
-                _chunks[index] = new Chunk(this, new ChunkCoord(x, z));
+                _chunks[index] = CreateChunk(x, z);
                 index++;
             }
         }
+    }
+
+    // Return voxel ID based on position
+    // Used to generate different block types
+    public byte GetVoxel(Vector3 pos)
+    {
+        //if (!IsVoxelInWorld(pos)) return 0;
         
+        switch (pos.y)
+        {
+            case var h when h > GrassHeight + Random.Range(-GrassHeightRange, GrassHeightRange):
+                return 4;
+            case var h when h > DirtHeight + Random.Range(-DirtHeightRange, DirtHeightRange):
+                return 3;
+            case var h when h > StoneHeight + Random.Range(-StoneHeightRange, StoneHeightRange):
+                return 2;
+            case var h when h >= BedrockHeight + Random.Range(-BedrockHeightRange, BedrockHeightRange):
+                return 1;
+            default:
+                Debug.LogWarning("Block spawn height out of range!");
+                return 0;
+        }
+        
+    }
+
+    bool IsChunkInworld(Vector2Int coord)
+    {
+        return coord.x >= 0 && coord.x < WorldData.WorldSizeInChunks  && 
+               coord.y >= 0 && coord.y < WorldData.WorldSizeInChunks;
+    }
+
+    bool IsVoxelInWorld(Vector3 pos)
+    {
+        return 
+            pos.x >= 0 && pos.x < (WorldData.WorldSizeInChunks) * ChunkData.ChunkSize && 
+            pos.y >= 0 && pos.y < ChunkData.ChunkHeight && 
+            pos.z >= 0 && pos.z < (WorldData.WorldSizeInChunks) * ChunkData.ChunkSize;
+    }
+    
+
+    Chunk CreateChunk(int x, int z)
+    {
+        return new Chunk(this, new Vector2Int(x, z));
+    }
+
+
+    public Chunk GetChunk(int x, int z)
+    {
+        int index = x + z * WorldData.WorldSizeInChunks;
+        return _chunks[index];
     }
     
     

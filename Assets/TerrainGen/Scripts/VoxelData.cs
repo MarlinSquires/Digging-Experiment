@@ -10,7 +10,7 @@ public static class VoxelData
     public static float normalizedBlockSize => 1f / AtlasSizeInBlocks; // The portion of the UV map an individual block takes up, expressed as a float between 0 and 1
 
 
-    // The 8 vertices of each cubic voxel
+    // The 8 local-space positions for the 24 vertices of each cubic voxel
     public static readonly Vector3[] VoxelVerts = new Vector3[8]
     {
         new Vector3(0, 0, 0), // 0
@@ -24,21 +24,15 @@ public static class VoxelData
         new Vector3(0, 1, 1), // 7
     };
     
-    // The 12 tris of each voxel. each entry of 4 ints corresponds to 2 tris (1 face), since each face will have its tris share 2 vertices
-    public static readonly int[,] VoxelTris = new int[6, 4]
+    // While there are only 8 vert positions, each position is shared by 3 verts (1 for each connecting face), so the true vert count is 24
+    public static readonly int[] FaceVertexIndices = new int[24]
     {
-        { 0, 3, 1, 2 }, // Back face
-        { 5, 6, 4, 7 }, // Front face
-        { 3, 7, 2, 6 }, // Top face
-        { 1, 5, 0, 4 }, // Bottom face
-        { 4, 7, 0, 3 }, // Left face
-        { 1, 2, 5, 6 }, // Right face
-    };
-    
-    // The order in which the verts of a face are iterated over to create 2 tris
-    public static readonly int[] VertOrder = new int[6]
-    {
-        0, 1, 2, 2, 1, 3
+         0, 3, 1, 2 , // Back face
+         5, 6, 4, 7 , // Front face
+         3, 7, 2, 6 , // Top face
+         1, 5, 0, 4 , // Bottom face
+         4, 7, 0, 3 , // Left face
+         1, 2, 5, 6   // Right face
     };
     
     // The normals for each of the 6 faces of the voxel
